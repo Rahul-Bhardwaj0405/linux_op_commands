@@ -1,0 +1,207 @@
+
+starting procedure:
+ python3 --version
+sudo apt-get install python3-venv
+python3 -m venv env
+source env/bin/activate
+*************
+open terminal in windows: Press Ctrl + Alt + T on your keyboard.
+open vs_code from terminal: code.
+********
+
+***command to switch to rootpg***
+
+sudo -i
+
+*****
+
+To install packages follow below procedure(requirements.txt):
+
+pip install django pandas celery[redis] django-celery-beat  openpyxl django-celery-results chardet odfpy vine xlrd psycopg2-binary
+
+*********
+Alternative of psycopg2:
+
+
+run this on terminal: sudo apt-get update
+then, sudo apt-get install --fix-missing libpq-dev
+
+then:
+
+paste this command inside after activating env:
+
+pip install psycopg2
+******
+
+command to install git:
+
+paste this on terminal: sudo apt-get install git
+
+
+*********rabbitmq*****
+sudo systemctl start rabbitmq-server
+sudo systemctl enable rabbitmq-server
+sudo systemctl stop rabbitmq-server
+sudo systemctl status rabbitmq-server
+sudo systemctl restart rabbitmq-server
+
+
+*****celery commands *******
+
+# Start Celery
+sudo systemctl start celery
+
+# Enable Celery to start on boot
+sudo systemctl enable celery
+
+# Stop Celery
+sudo systemctl stop celery
+
+# Check Celery status
+sudo systemctl status celery
+
+# Restart Celery
+sudo systemctl restart celery
+
+tail -f /var/log/celery/worker.log
+
+
+
+**Postgres** through terminal:
+
+
+Postgres commands in terminal:
+sudo systemctl start postgresql
+sudo systemctl status postgresql
+sudo systemctl stop postgresql
+
+psql terminal:
+sudo -u postgres psql
+CREATE DATABASE your_database_name;
+CREATE USER your_username WITH PASSWORD 'your_password';
+GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_username;
+terminate c: \q
+
+
+Steps to Connect to the Correct Database and Query the Table:
+
+\l
+\c your_database_name
+\dt
+SELECT * FROM BookingData;
+
+
+****SMB4k: search in starmemu => bookmark => mounbookmark
+
+**** oracle instant client installation steps:
+
+Terminal setting:
+
+first way:
+
+pg@pgPC:/$ cd opt
+pg@pgPC:/opt$ ls
+instantclient_23_4
+pg@pgPC:/opt$ cd instantclient_23_4/
+pg@pgPC:/opt/instantclient_23_4$ ls
+lib
+pg@pgPC:/opt/instantclient_23_4$ cd lib
+pg@pgPC:/opt/instantclient_23_4/lib$ ls
+
+network
+
+pg@pgPC:/opt/instantclient_23_4/lib/network$ ls
+admin
+pg@pgPC:/opt/instantclient_23_4/lib/network$ cd admin/
+pg@pgPC:/opt/instantclient_23_4/lib/network/admin$ ls
+README  tnsnames.ora
+pg@pgPC:/opt/instantclient_23_4/lib/network/admin$
+
+second way:
+
+pip install oracledb
+
+in vs code terminal:
+
+
+
+
+import oracledb
+
+un = 'PGACT7'
+cs = '10.78.14.42:1725/rpdb_srv.cris.org.in'
+pw = 'Oct_2024'
+
+//cx_Oracle.connect('PGACT7/sep_2024@10.78.14.42:1725/rpdb_srv.cris.org.in')
+
+with oracledb.connect(user='PGACT7', password='Oct2024', dsn='10.78.14.42:1725/rptdb_srv.cris.org.in') as connection:
+    with connection.cursor() as cursor:
+        sql = """select sysdate from dual"""
+        for r in cursor.execute(sql):
+            print(r)
+                     or
+in views.py:
+
+
+
+import oracledb
+
+# Establish a connection to the production Oracle database
+with oracledb.connect(user='PGACT7', password='Oct2024', dsn='10.78.14.42:1725/rptdb_srv.cris.org.in') as connection:
+    with connection.cursor() as cursor:
+        # Use FETCH FIRST to limit the rows (Oracle SQL syntax)
+        sql = """SELECT * FROM TRANSACTION_DB.ET_TICKET FETCH FIRST 10 ROWS ONLY"""
+
+        # Execute the query
+        cursor.execute(sql)
+        # Fetch and print the results
+        for row in cursor:
+            print(row)
+
+*********************************************************
+
+
+*****command to start celery worker****
+
+celery -A your_project_name worker --loglevel=info
+
+
+If you are uploading project code from vscode to github follow below steps:
+
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+
+
+step 2: create repository in github
+
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin <repository-url>
+git push -u origin master
+
+
+git branches check:
+
+to create new branch: git checkout -b feature/new-feature
+This creates a new branch named feature/new-feature and switches to it.
+
+
+# Step 2: Make changes in your code
+
+# Step 3: Stage and commit the changes
+git add .
+git commit -m "Add new feature"
+
+# Step 4: Push the new branch to GitHub
+git push -u origin feature/new-feature
+
+# Step 5: Merge the pull request on GitHub via the GitHub UI
+
+# Step 6 (Optional): Delete the branch locally and on GitHub
+git branch -d feature/new-feature
+git push origin --delete feature/new-feature
+
+
+
+
